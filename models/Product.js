@@ -6,14 +6,8 @@ const productSchema = mongoose.Schema({
     description: {type: String},
     mediaUrl: {type: String},
     quantity: {type: Number, required: true},
-    details: {
-        totalReviews: {type: Number},
-        rating: {type: Number},
-        availabilityStatus: {type: String},
-        productCategory: {type: String},
-    }
 });
 
-const ProductModel = ProductModel.model('ProductModel');
+const ProductModel = mongoose.model('ProductModel', productSchema);
 
 module.exports = ProductModel;
