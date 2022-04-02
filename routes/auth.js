@@ -23,6 +23,9 @@ router.post("/register", async(req, res) => {
         res.status(500).json(err.message);
     }
 });
+
+router.post("/login", async (req, res) => {
+    try {
         const user = await UserModel.findOne({email: req.body.email});
         
         !user && res.status(401).json("Wrong credential!");
