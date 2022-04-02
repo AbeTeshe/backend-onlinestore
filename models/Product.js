@@ -6,6 +6,17 @@ const productSchema = mongoose.Schema({
     description: {type: String},
     mediaUrl: {type: String},
     quantity: {type: Number, required: true},
+    details: {
+        totalReviews: {type: Number},
+        rating: {type: Number},
+        availabilityStatus: {type: String},
+        productCode: {type: Number},
+        productCategory: {type: String},
+        image1: {type: String},
+        image2: {type: String},
+        image3: {type: String},
+        image4: {type: String},
+    }
 });
 
 const ProductModel = mongoose.model('ProductModel', productSchema);
