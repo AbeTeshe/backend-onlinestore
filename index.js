@@ -7,6 +7,7 @@ const authRoutes = require("./routes/auth");
 const userProfileRoutes = require("./routes/userProfile");
 const productRoutes = require("./routes/product");
 const stripeRoutes = require("./routes/stripe");
+const orderRoutes = require("./routes/order");
 
 dotenv.config();
 
@@ -20,12 +21,12 @@ mongoose.connect('mongodb+srv://Abe_user:abe%40123@test-cluster.r34xa.mongodb.ne
     });
 
 app.use(express.json());
- app.use("/api/auth", authRoutes)
+
+app.use("/api/auth", authRoutes)
 app.use("/api/userProfiles", userProfileRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/checkout", stripeRoutes);
-
-
+app.use("/api/orders", orderRoutes);
 
 app.listen( 5000, () => {
     console.log(`Backend server is running on port: 5000`)

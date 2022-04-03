@@ -8,9 +8,9 @@ router.post("/",  async(req, res) => {
 
     try {
         const savedProduct = await newProduct.save();
-        res.status(200).json(savedProduct);
+        return res.status(200).json(savedProduct);
     } catch (err) {
-        res.status(500).json(err);
+        return res.status(500).json(err);
     }
 })
 //UPDATE
@@ -20,10 +20,10 @@ router.put("/:id",  async (req, res) => {
         const updatedProduct = await ProductModel.findByIdAndUpdate(req.params.id, {
             $set: req.body
         }, {new: true});
-        res.status(200).json(updatedProduct);
+        return res.status(200).json(updatedProduct);
 
     } catch (err) {
-        res.status(500).json(err);
+        return res.status(500).json(err);
     }
 });
 
@@ -32,9 +32,9 @@ router.put("/:id",  async (req, res) => {
 router.delete("/:id",  async(req, res) => {
     try {
         await ProductModel.findByIdAndDelete(req.params.id);
-        res.status(200).json("Product has been deleted...");
+        return res.status(200).json("Product has been deleted...");
     } catch (err) {
-        res.status(500).json(err);
+        return res.status(500).json(err);
     }
 });
 
@@ -43,9 +43,9 @@ router.get("/find/:id", async(req, res) => {
     try {
         const product = await ProductModel.findById(req.params.id);
     
-        res.status(200).json(product);
+        return res.status(200).json(product);
     } catch (err) {
-        res.status(500).json(err);
+        return res.status(500).json(err);
     }
 });
 
@@ -53,18 +53,18 @@ router.get("/find/:id", async(req, res) => {
 router.get("/", async(req, res) => {
     try {
         const products = await ProductModel.find();
-        res.status(200).json(products);
+        return res.status(200).json(products);
     } catch (error) {
-        res.status(500).json(error);
+        return res.status(500).json(error);
     }
 });
 
 router.get("/:id", async(req, res) => {
     try {
         const product= await ProductModel.findById(req.params.id);
-        res.status(200).json(product);
+        return res.status(200).json(product);
     } catch (error) {
-        res.status(500).json(error);
+        return res.status(500).json(error);
     }
 })
 
