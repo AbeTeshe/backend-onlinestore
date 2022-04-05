@@ -6,6 +6,7 @@ const productSchema = mongoose.Schema({
     description: {type: String},
     mediaUrl: {type: String},
     quantity: {type: Number, required: true},
+    supplier: {type: String},
     details: {
         totalReviews: {type: Number},
         rating: {type: Number},
