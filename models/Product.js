@@ -7,11 +7,12 @@ const productSchema = mongoose.Schema({
     mediaUrl: {type: String},
     quantity: {type: Number, required: true},
     supplier: {type: String},
+    isActive: {type: Boolean, default: true},
     details: {
         totalReviews: {type: Number},
         rating: {type: Number},
         availabilityStatus: {type: String},
-        productCode: {type: Number},
+        productCode: {type: String},
         productCategory: {type: String},
         image1: {type: String},
         image2: {type: String},

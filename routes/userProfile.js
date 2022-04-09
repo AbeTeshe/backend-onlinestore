@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const { json } = require('express/lib/response');
 const UserProfileModel = require('../models/UserProfile');
 
 //CREATE PERSON
@@ -21,18 +20,6 @@ router.put("/:id",  async(req, res) => {
         const updatedPerson = await UserProfileModel.findByIdAndUpdate(req.params.id, 
             {$set: req.body}, {new: true});
         return res.status(200).json(updatedPerson);
-    }
-    catch(err){
-        return res.status(500).json(err);
-    }
-});
-
-//DELETE PERSON
-
-router.delete("/:id", async(req, res) => {
-    try {
-        await UserProfileModel.findByIdAndDelete(req.params.id);
-        return res.status(200).json("User Profile has been deleted.");
     }
     catch(err){
         return res.status(500).json(err);

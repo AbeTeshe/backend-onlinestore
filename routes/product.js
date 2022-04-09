@@ -27,17 +27,6 @@ router.put("/:id",  async (req, res) => {
     }
 });
 
-
-//DELETE 
-router.delete("/:id",  async(req, res) => {
-    try {
-        await ProductModel.findByIdAndDelete(req.params.id);
-        return res.status(200).json("Product has been deleted...");
-    } catch (err) {
-        return res.status(500).json(err);
-    }
-});
-
 //GET PRODUCT
 router.get("/find/:id", async(req, res) => {
     try {
