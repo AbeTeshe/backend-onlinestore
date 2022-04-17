@@ -27,16 +27,17 @@ router.put("/:id",  async (req, res) => {
     }
 });
 
-//GET PRODUCT
-router.get("/find/:id", async(req, res) => {
-    try {
-        const product = await ProductModel.findById(req.params.id);
+// //GET PRODUCT
+// router.get("/find/:id", async(req, res) => {
+//     try {
+//         const product = await ProductModel.findById(req.params.id);
     
-        return res.status(200).json(product);
-    } catch (err) {
-        return res.status(500).json(err);
-    }
-});
+//         return res.status(200).json(product);
+//     } catch (err) {
+//         return res.status(500).json(err);
+//     }
+// });
+
 
 //GET ALL PRODUCTS
 router.get("/", async(req, res) => {

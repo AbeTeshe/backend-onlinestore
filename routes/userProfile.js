@@ -26,15 +26,24 @@ router.put("/:id",  async(req, res) => {
     }
 });
 
-//GET PERSON
+// //GET PERSON
+// router.get("/:id", async(req, res) => {
+//     try {
+//         const persons = await UserProfileModel.find({userId: req.params.id});
+//         return res.status(200).json(persons);
+//     } catch (err) {
+//         return res.status(500).json(err);
+//     }
+// });
+
 router.get("/:id", async(req, res) => {
     try {
-        const persons = await UserProfileModel.find({userId: req.params.id});
-        return res.status(200).json(persons);
-    } catch (err) {
-        return res.status(500).json(err);
+        const userProfiles = await UserProfileModel.findById(req.params.id);
+        return res.status(200).json(userProfiles);
+    } catch (error) {
+        console.log(error.message);
     }
-});
+})
 
 router.get("/", async(req, res) => {
     try {
