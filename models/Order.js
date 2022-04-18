@@ -16,7 +16,7 @@ const orderSchema = mongoose.Schema({
         postalCode: {type: String, required: true},
         country: {type: String, required: true},
     },
-    orderStatus: {type: String, default: 'pending'},
+    orderStatus: {type: String, default: 'Pending'},
     totalPrice: {type: Number, required: true},
     userId: {type: String, required: true},
     },

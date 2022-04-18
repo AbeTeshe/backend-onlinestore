@@ -8,6 +8,7 @@ const userProfileRoutes = require("./routes/userProfile");
 const productRoutes = require("./routes/product");
 const stripeRoutes = require("./routes/stripe");
 const orderRoutes = require("./routes/order");
+const invoiceRoutes = require("./routes/invoice");
 
 dotenv.config();
 
@@ -27,6 +28,7 @@ app.use("/api/userProfiles", userProfileRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/checkout", stripeRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/invoices", invoiceRoutes);
 
 app.listen( 5000, () => {
     console.log(`Backend server is running on port: 5000`)
