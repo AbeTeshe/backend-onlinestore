@@ -36,7 +36,7 @@ router.get("/:id", async(req, res) => {
     }
 });
 
-router.get("/:id", async(req, res) => {
+router.get("/find/:id", async(req, res) => {
     try {
         const userProfiles = await UserProfileModel.findById(req.params.id);
         return res.status(200).json(userProfiles);
