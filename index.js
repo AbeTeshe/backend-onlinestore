@@ -16,7 +16,7 @@ dotenv.config();
 const app = express();
 app.use(cors());
 
-mongoose.connect('mongodb+srv://Abe_user:abe%40123@test-cluster.r34xa.mongodb.net/onlinestore?retryWrites=true&w=majority')
+mongoose.connect(process.env.MONGO_URL)
         .then(() => console.log("Database Connected Successfully!"))
         .catch((err) => {
             console.log(err.message);
@@ -31,6 +31,6 @@ app.use("/api/checkout", stripeRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/invoices", invoiceRoutes);
 app.use("/api/logo", logoRoutes);
-app.listen( 5000, () => {
-    console.log(`Backend server is running on port: 5000`)
+app.listen(process.env.PORT, () => {
+    console.log(`Backend server is running on port: ${process.env.PORT}`)
 })
