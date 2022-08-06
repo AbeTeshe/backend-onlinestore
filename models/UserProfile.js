@@ -5,14 +5,16 @@ const userProfileSchema = mongoose.Schema({
     firstName: {type: String, required: true},
     lastName: {type: String, required: true},
     email: {type: String, required: true, unique: true},
+    password: {type: String},
     phoneNumber: {type: String},
-    country: {type: String, required: true},
-    city: {type: String, required: true},
-    addressLine1: {type: String, required: true},
-    zipCode: {type: String, required: true},
+    country: {type: String},
+    city: {type: String},
+    addressLine1: {type: String},
+    zipCode: {type: String},
     shippingDivision: {type: String},
     shippingOption: {type: String},
     isActive: {type: Boolean, default: true},
+    isAdmin: {type: Boolean, default: false},
 });
 
 const UserProfileModel = mongoose.model('UserProfileModel', userProfileSchema);
