@@ -1,10 +1,13 @@
 const InvoiceModel = require("../models/Invoice");
-
-
 const router = require("express").Router();
+const {
+  verifyToken,
+  verifyTokenAndAuthorization,
+  verifyTokenAndAdmin,
+} = require("./verifyToken");
 
 //CREATE
-router.post("/", async (req, res) => {
+router.post("/", verifyToken, async (req, res) => {
   const newInvoice = new InvoiceModel(req.body);
 
   try {
@@ -16,7 +19,7 @@ router.post("/", async (req, res) => {
 });
 
 //UPDATE
-router.put("/:id",  async (req, res) => {
+router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
   try {
     const updatedInvoice = await InvoiceModel.findByIdAndUpdate(
       req.params.id,
@@ -32,7 +35,7 @@ router.put("/:id",  async (req, res) => {
 });
 
 //DELETE
-router.delete("/:id",  async (req, res) => {
+router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
   try {
     await InvoiceModel.findByIdAndDelete(req.params.id);
     res.status(200).json("Invoice has been deleted...");
@@ -42,7 +45,7 @@ router.delete("/:id",  async (req, res) => {
 });
 
 //GET USER ORDERS
-router.get("/find/:userId",  async (req, res) => {
+router.get("/find/:userId", verifyTokenAndAdmin,  async (req, res) => {
   try {
     const invoices = await InvoiceModel.find({ userId: req.params.userId }).sort({createdAt: -1});
     res.status(200).json(invoices);
@@ -53,7 +56,7 @@ router.get("/find/:userId",  async (req, res) => {
 
 // //GET ALL
 
-router.get("/",  async (req, res) => {
+router.get("/", verifyTokenAndAdmin, async (req, res) => {
   try {
     const invoices = await InvoiceModel.find().sort({createdAt: -1});
     res.status(200).json(invoices);
@@ -62,7 +65,7 @@ router.get("/",  async (req, res) => {
   }
 });
 
-router.get("/:id",  async (req, res) => {
+router.get("/:id", verifyTokenAndAdmin, async (req, res) => {
   try {
     const invoice = await InvoiceModel.findById(req.params.id);
     res.status(200).json(invoice);

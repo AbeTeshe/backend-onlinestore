@@ -3,7 +3,7 @@ const UserProfileModel = require('../models/UserProfile');
 const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
 
-router.post("/register", async(req, res) => {
+router.post("/register",  async(req, res) => {
     const {firstName, lastName,  email, password, confirmPassword} = req.body;
     try {
         const existingUser = await UserProfileModel.findOne({email});
@@ -14,9 +14,10 @@ router.post("/register", async(req, res) => {
         const user = await UserProfileModel.create({firstName, lastName, email, password: hashedPassword});
 
         const accessToken = jwt.sign({
-            id: user._id
-        }, 'secret', {expiresIn: "3d"});
-
+            id: user._id,
+            isAdmin: user.isAdmin
+        }, process.env.JWT_SECRET, {expiresIn: "3d"});
+        
         return res.status(200).json({...user._doc, accessToken});
     } catch (err) {
         return res.status(500).json(err.message);
@@ -37,8 +38,9 @@ router.post("/login", async (req, res) => {
         if(originalPassword !== req.body.password) return res.status(401).json("Incorrect password!");
         
         const accessToken = jwt.sign({
-            id:user._id
-        }, 'secret', {expiresIn: "3d"});
+            id:user._id,
+            isAdmin: user.isAdmin
+        }, process.env.JWT_SECRET, {expiresIn: "3d"});
 
         const {password, ...others} = user._doc;
         return res.status(200).json({...others, accessToken});

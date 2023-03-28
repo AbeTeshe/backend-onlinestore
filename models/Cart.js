@@ -2,12 +2,15 @@ const mongoose = require('mongoose');
 
 const cartSchema = mongoose.Schema({
     userId: {type: String},
-    name: {type: String},
-    price: {type: Number},
-    quantity: {type: Number},
-    totalPrice: {type: Number},
-    image: {type: String},
-});
+    cartItems: [
+        {
+            productId: {type: String},
+            quantity: {type: Number, default: 1},
+        }
+    ],
+},
+{ timestamps: true }
+);
 
 const CartModel = mongoose.model('CartModel', cartSchema);
 

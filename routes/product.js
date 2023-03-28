@@ -1,9 +1,10 @@
 
 const router = require('express').Router();
 const ProductModel = require("../models/Product");
+const  {verifyTokenAndAuthorization, verifyTokenAndAdmin} = require('./verifyToken');
 
 //CREATE PRODUCT 
-router.post("/",  async(req, res) => {
+router.post("/",  verifyTokenAndAdmin, async(req, res) => {
     const newProduct = new ProductModel(req.body);
 
     try {
@@ -14,7 +15,7 @@ router.post("/",  async(req, res) => {
     }
 })
 //UPDATE
-router.put("/:id",  async (req, res) => {
+router.put("/:id", verifyTokenAndAdmin,  async (req, res) => {
     
     try {
         const updatedProduct = await ProductModel.findByIdAndUpdate(req.params.id, {
@@ -26,17 +27,6 @@ router.put("/:id",  async (req, res) => {
         return res.status(500).json(err);
     }
 });
-
-// //GET PRODUCT
-// router.get("/find/:id", async(req, res) => {
-//     try {
-//         const product = await ProductModel.findById(req.params.id);
-    
-//         return res.status(200).json(product);
-//     } catch (err) {
-//         return res.status(500).json(err);
-//     }
-// });
 
 
 //GET ALL PRODUCTS
